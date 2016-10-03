@@ -19,38 +19,38 @@ class PlaySoundsViewController: UIViewController {
     @IBOutlet weak var rabitButton: UIButton!
     
     
-    var recordedAudioURL: NSURL!
+    var recordedAudioURL: URL!
     var audioFile: AVAudioFile!
     var audioEngine: AVAudioEngine!
     var audioPlayerNode: AVAudioPlayerNode!
     @IBOutlet weak var stopButton: UIButton!
-    var stopTimer: NSTimer!
+    var stopTimer: Timer!
     
-    enum ButtonType: Int {case Slow = 0, Fast, Darth, Chipmunk, Echo, Reverb }
+    enum ButtonType: Int {case slow = 0, fast, darth, chipmunk, echo, reverb }
     
 
     
-    @IBAction func playSoundForButton(sender: AnyObject) {
+    @IBAction func playSoundForButton(_ sender: AnyObject) {
         print("Play Sound")
         switch (ButtonType(rawValue: sender.tag)!) {
-        case .Slow:
+        case .slow:
             playSound(rate: 0.5)
-        case .Fast:
+        case .fast:
             playSound(rate: 1.5)
-        case .Chipmunk:
+        case .chipmunk:
             playSound(pitch: 1000)
-        case .Darth:
+        case .darth:
             playSound(pitch: -1000)
-        case .Echo:
+        case .echo:
             playSound(echo: true)
-        case .Reverb:
+        case .reverb:
             playSound(reverb: true)
         }
         
-        configureUI(.Playing)
+        configureUI(.playing)
     }
     
-    @IBAction func stopSoundforButton(sender: AnyObject) {
+    @IBAction func stopSoundforButton(_ sender: AnyObject) {
         print("Stop Sound")
         stopAudio()
     }
@@ -60,8 +60,8 @@ class PlaySoundsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
-        configureUI(.NotPlaying)
+    override func viewWillAppear(_ animated: Bool) {
+        configureUI(.notPlaying)
     }
 
     override func didReceiveMemoryWarning() {
